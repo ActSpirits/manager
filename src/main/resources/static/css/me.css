@@ -1,0 +1,10 @@
+
+body{
+    background-image: url("../img/bg.png");
+    background-size: cover;
+    background-attachment: fixed;
+}
+/*--margin--*/
+.m-margin-t{
+    margin-top: 12px;
+}
