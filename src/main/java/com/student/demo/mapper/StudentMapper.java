@@ -42,4 +42,10 @@ public interface StudentMapper extends BaseMapper<Student> {
 
     @Update("update t_student set name = #{name},age = #{age},classId = #{classId}, password = #{password} where id = #{id}")
     public void updateOne(@Param("id") String id,@Param("name") String name,@Param("age") Integer age,@Param("classId") Integer classId,@Param("password") String password);
+
+    @Insert("insert into t_student_course (studentId,courseId) value (#{studentId},#{courseId})")
+    public void selectCourse(@Param("studentId") String id,@Param("courseId") Integer id1);
+
+    @Delete("delete from t_student_course where studentId = #{studentId} and courseId = #{courseId} ")
+    public void disSelectCourse(@Param("studentId") String id,@Param("courseId") Integer id1);
 }

@@ -49,4 +49,14 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     public void updateOne(Student student) {
         studentMapper.updateOne(student.getId(),student.getName(),student.getAge(),student.getClassId(),student.getPassword());
     }
+
+    @Override
+    public void selectCourse(String id, Integer id1) {
+        studentMapper.selectCourse(id,id1);
+    }
+
+    @Override
+    public void disSelectCourse(String id, Integer id1) {
+        studentMapper.disSelectCourse(id,id1);
+    }
 }

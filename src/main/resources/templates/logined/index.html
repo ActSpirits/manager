@@ -77,7 +77,8 @@
         <div class="twelve wide column">
             <div class="ui top attached tabular menu">
                 <a class="item active" data-tab="first">课程</a>
-                <a class="item" data-tab="second">成绩</a>
+<!--                <a class="item" data-tab="second">成绩</a>-->
+                <a class="item" data-tab="second">选课</a>
             </div>
             <div class="ui bottom attached tab segment active" data-tab="first">
                 <table class="ui celled table">
@@ -143,26 +144,43 @@
                     </tbody>
                 </table>
             </div>
+            <!--课程管理-->
             <div class="ui bottom attached tab segment" data-tab="second">
                 <table class="ui celled table">
                     <thead>
                     <tr>
-                        <th>学科名称</th>
-                        <th>出成绩时间</th>
-                        <th>分数</th>
+                        <th class="center aligned">课程名称</th>
+                        <th class="center aligned">任课老师</th>
+                        <th class="center aligned">上课地址</th>
+                        <th class="center aligned">上课时间</th>
+                        <th class="center aligned">学生数量</th>
+                        <th class="center aligned">操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="grade:${session.loginStudent.getGradeList()}">
-                        <td th:text="${grade.course.name}">空间</td>
-                        <td th:text="${grade.time}">空间</td>
-                        <td th:text="${grade.grade}">空间</td>
+                    <tr th:each="course:${courseList}">
+                        <td class="center aligned" th:text="${course.name}">空间</td>
+                        <td class="center aligned" th:text="${course.teacher}">空间</td>
+                        <td class="center aligned" th:text="${course.address}">空间</td>
+                        <td class="center aligned" th:text="${course.time}">空间</td>
+                        <td class="center aligned" th:text="${course.studentList.size()}">空间</td>
+                        <td class="center aligned">
+                            <a th:href="@{/selectCourse(id = ${course.id})}" class="ui blue button">
+                                选课
+                            </a>
+                            <a th:each="studentCourse:${session.loginStudent.courseList}" th:if="${studentCourse.getTime() == course.time}" th:href="@{/disSelectCourse(id = ${course.id})}" class="ui red button">
+                                退课
+                            </a>
+<!--                            <a th:each="studentCourse:${session.loginStudent.courseList}" th:if="${studentCourse.getTime() == course.time}" th:href="@{/selectCourse(id = ${course.id})}" class="ui blue button">-->
+<!--                                选课-->
+<!--                            </a>-->
+                        </td>
+
                     </tr>
                     </tbody>
-
                 </table>
             </div>
-
+            </div>
         </div>
     </div>
 </div>

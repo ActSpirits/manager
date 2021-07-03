@@ -22,4 +22,19 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     public List<Course> listAllCourse() {
         return courseMapper.listAllCourse();
     }
+
+    @Override
+    public void insertOne(Course course) {
+        courseMapper.insertOne(course.getName(),course.getTeacher(),course.getAddress(),course.getTime());
+    }
+
+    @Override
+    public void updateOne(Course course) {
+        courseMapper.updateOne(course.getId(),course.getName(),course.getTeacher(),course.getAddress(),course.getTime());
+    }
+
+    @Override
+    public Course getOneById(Integer id) {
+        return courseMapper.getOneById(id);
+    }
 }

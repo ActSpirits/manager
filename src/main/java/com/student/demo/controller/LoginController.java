@@ -1,8 +1,5 @@
 package com.student.demo.controller;
 
-import com.student.demo.Bean.Class;
-import com.student.demo.Bean.Course;
-import com.student.demo.Bean.Grade;
 import com.student.demo.Bean.Student;
 import com.student.demo.service.ClassService;
 import com.student.demo.service.CourseService;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @Slf4j

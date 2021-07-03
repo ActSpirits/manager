@@ -16,4 +16,8 @@ public interface StudentService extends IService<Student> {
     public void deleteOne(String id);
 
     public void updateOne(Student student);
+
+    public void selectCourse(String id, Integer id1);
+
+    public void disSelectCourse(String id, Integer id1);
 }

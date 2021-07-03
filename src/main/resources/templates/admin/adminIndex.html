@@ -168,18 +168,40 @@
                                             </div>
                                             <div class="field">
                                                 <label>上课地址</label>
-                                                <input type="text" name="age" placeholder="请输入上课地址">
+                                                <input type="text" name="address" placeholder="请输入上课地址">
                                             </div>
                                             <div class="field">
                                                 <label>上课时间</label>
                                                 <div class="ui selection dropdown timeDropdown">
-                                                    <input type="hidden" name="classId">
+                                                    <input type="hidden" name="time">
                                                     <i class="dropdown icon"></i>
                                                     <div class="default text">请选择上课时间</div>
                                                     <div class="menu">
-                                                        <div class="item" >Male</div>
-                                                        <div class="item">Male</div>
-                                                        <div class="item">Male</div>
+                                                        <div class="item" th:data-value="周一上午一二节">周一上午一二节</div>
+                                                        <div class="item" th:data-value="周一上午三四节">周一上午三四节</div>
+                                                        <div class="item" th:data-value="周一下午一二节">周一下午一二节</div>
+                                                        <div class="item" th:data-value="周一下午一二节">周一下午一二节</div>
+                                                        <div class="item" th:data-value="周二上午一二节">周二上午一二节</div>
+                                                        <div class="item" th:data-value="周二上午三四节">周二上午三四节</div>
+                                                        <div class="item" th:data-value="周二下午一二节">周二下午一二节</div>
+                                                        <div class="item" th:data-value="周二下午一二节">周二下午一二节</div>
+                                                        <div class="item" th:data-value="周三上午一二节">周三上午一二节</div>
+                                                        <div class="item" th:data-value="周三上午三四节">周三上午三四节</div>
+                                                        <div class="item" th:data-value="周三下午一二节">周三下午一二节</div>
+                                                        <div class="item" th:data-value="周三下午一二节">周三下午一二节</div>
+                                                        <div class="item" th:data-value="周四上午一二节">周四上午一二节</div>
+                                                        <div class="item" th:data-value="周四上午三四节">周四上午三四节</div>
+                                                        <div class="item" th:data-value="周四下午一二节">周四下午一二节</div>
+                                                        <div class="item" th:data-value="周四下午一二节">周四下午一二节</div>
+                                                        <div class="item" th:data-value="周五上午一二节">周五上午一二节</div>
+                                                        <div class="item" th:data-value="周五上午三四节">周五上午三四节</div>
+                                                        <div class="item" th:data-value="周五下午一二节">周五下午一二节</div>
+                                                        <div class="item" th:data-value="周五下午一二节">周五下午一二节</div>
+                                                        <div class="item" th:data-value="周六上午一二节">周六上午一二节</div>
+                                                        <div class="item" th:data-value="周六上午三四节">周六上午三四节</div>
+                                                        <div class="item" th:data-value="周六下午一二节">周六下午一二节</div>
+                                                        <div class="item" th:data-value="周六下午一二节">周六下午一二节</div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,12 +219,68 @@
                                 <td class="center aligned" th:text="${course.time}">空间</td>
                                 <td class="center aligned" th:text="${course.studentList.size()}">空间</td>
                                 <td class="center aligned">
-                                    <button class="ui blue button">
+                                    <button data-position="bottom center" class="ui blue button updateCourseButton">
                                         修改
                                     </button>
-                                    <button class="ui red button">
-                                        删除
-                                    </button>
+                                    <div class="ui special popup updateCoursePopup">
+                                        <form class="ui form" method="post" th:action="@{/admin/course/update}">
+                                            <div class="field">
+                                                <label>课程id</label>
+                                                <input type="text" name="id" placeholder="请输入课程名称" th:value="${course.id}" hidden="hidden">
+                                            </div>
+                                            <div class="field">
+                                                <label>课程名称</label>
+                                                <input type="text" name="name" placeholder="请输入课程名称" th:value="${course.name}">
+                                            </div>
+                                            <div class="field">
+                                                <label>任课老师</label>
+                                                <input type="text" name="teacher" placeholder="请输入任课老师"  th:value="${course.teacher}">
+                                            </div>
+                                            <div class="field">
+                                                <label>上课地址</label>
+                                                <input type="text" name="address" placeholder="请输入上课地址"  th:value="${course.address}">
+                                            </div>
+                                            <div class="field">
+                                                <label>上课时间</label>
+                                                <div class="ui selection dropdown timeDropdown">
+                                                    <input type="hidden" name="time" th:value="${course.time}">
+                                                    <i class="dropdown icon"></i>
+                                                    <div class="text"  th:text="${course.time}">请选择上课时间</div>
+                                                    <div class="menu">
+                                                        <div class="item" th:data-value="每周一上午一二节">每周一上午一二节</div>
+                                                        <div class="item" th:data-value="每周一上午三四节">每周一上午三四节</div>
+                                                        <div class="item" th:data-value="每周一下午一二节">每周一下午一二节</div>
+                                                        <div class="item" th:data-value="每周一下午一二节">每周一下午一二节</div>
+                                                        <div class="item" th:data-value="每周二上午一二节">每周二上午一二节</div>
+                                                        <div class="item" th:data-value="每周二上午三四节">每周二上午三四节</div>
+                                                        <div class="item" th:data-value="每周二下午一二节">每周二下午一二节</div>
+                                                        <div class="item" th:data-value="每周二下午一二节">每周二下午一二节</div>
+                                                        <div class="item" th:data-value="每周三上午一二节">每周三上午一二节</div>
+                                                        <div class="item" th:data-value="每周三上午三四节">每周三上午三四节</div>
+                                                        <div class="item" th:data-value="每周三下午一二节">每周三下午一二节</div>
+                                                        <div class="item" th:data-value="每周三下午一二节">每周三下午一二节</div>
+                                                        <div class="item" th:data-value="每周四上午一二节">每周四上午一二节</div>
+                                                        <div class="item" th:data-value="每周四上午三四节">每周四上午三四节</div>
+                                                        <div class="item" th:data-value="每周四下午一二节">每周四下午一二节</div>
+                                                        <div class="item" th:data-value="每周四下午一二节">每周四下午一二节</div>
+                                                        <div class="item" th:data-value="每周五上午一二节">每周五上午一二节</div>
+                                                        <div class="item" th:data-value="每周五上午三四节">每周五上午三四节</div>
+                                                        <div class="item" th:data-value="每周五下午一二节">每周五下午一二节</div>
+                                                        <div class="item" th:data-value="每周五下午一二节">每周五下午一二节</div>
+                                                        <div class="item" th:data-value="每周六上午一二节">每周六上午一二节</div>
+                                                        <div class="item" th:data-value="每周六上午三四节">每周六上午三四节</div>
+                                                        <div class="item" th:data-value="每周六下午一二节">每周六下午一二节</div>
+                                                        <div class="item" th:data-value="每周六下午一二节">每周六下午一二节</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="ui button" type="submit">提交</button>
+                                        </form>
+                                    </div>
+<!--                                    <a th:href="@{/admin/course/delete(id=${course.id})}" class="ui red button deleteCourseButton">-->
+<!--                                        删除-->
+<!--                                    </a>-->
                                 </td>
                             </tr>
                             </tbody>
@@ -228,6 +306,14 @@
                 return false;
             }
         })
+        $(".deleteCourseButton").click(function () {
+            var b = confirm("你确定要删除吗？");
+            if (b) {
+                return true;
+            } else {
+                return false;
+            }
+        })
         $(".insertStudentButton").popup({
             popup: '.insertStudentPopup',
             on: 'click'
@@ -238,6 +324,10 @@
         });
         $(".insertCourseButton").popup({
             popup: '.insertCoursePopup',
+            on: 'click'
+        });
+        $(".updateCourseButton").popup({
+            popup: '.updateCoursePopup',
             on: 'click'
         });
         $('.classDropdown')

@@ -11,4 +11,10 @@ import java.util.List;
 public interface CourseService extends IService<Course> {
 
     public List<Course> listAllCourse();
+
+    public void insertOne(Course course);
+
+    public void updateOne(Course course);
+
+    public Course getOneById(Integer id);
 }
