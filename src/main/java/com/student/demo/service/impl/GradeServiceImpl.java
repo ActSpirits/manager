@@ -15,4 +15,8 @@ public class GradeServiceImpl extends ServiceImpl<GradeMapper, Grade> implements
     private GradeMapper gradeMapper;
 
 
+    @Override
+    public void deleteByStudentId(String id) {
+        gradeMapper.deleteByStudentId(id);
+    }
 }

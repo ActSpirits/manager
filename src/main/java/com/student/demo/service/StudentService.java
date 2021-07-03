@@ -10,4 +10,10 @@ public interface StudentService extends IService<Student> {
     public Student getOneById(String id);
 
     public List<Student> listAllStudent();
+
+    public void insertOne(Student student);
+
+    public void deleteOne(String id);
+
+    public void updateOne(Student student);
 }

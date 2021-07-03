@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface GradeService extends IService<Grade> {
 
+    public void deleteByStudentId(String id);
 }

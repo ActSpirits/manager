@@ -17,54 +17,199 @@
 <body>
 <div class="ui container m-margin-t">
     <div class="ui stackable grid">
-        <div class="ui top attached tabular menu" style="margin-top: 40px">
-            <a class="active item" data-tab="first">学生管理</a>
-            <a class="item" data-tab="second">课程管理</a>
-        </div>
-        <div class="ui bottom attached active tab segment" data-tab="first">
-            <table class="ui celled table">
-                <thead>
-                <tr>
-                    <th>学号</th>
-                    <th>姓名</th>
-                    <th>年龄</th>
-                    <th>班级</th>
-                    <th>选课数量</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="student:${studentList}">
-                    <td th:text="${student.id}">空间</td>
-                    <td th:text="${student.name}">空间</td>
-                    <td th:text="${student.age}">空间</td>
-                    <td th:text="${student.itsClass.name}">空间</td>
-                    <td th:text="${student.courseList.size()}">空间</td>
-
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="ui bottom attached tab segment" data-tab="second">
-            <table class="ui celled table">
-                <thead>
-                <tr>
-                    <th>课程名称</th>
-                    <th>任课老师</th>
-                    <th>上课地址</th>
-                    <th>上课时间</th>
-                    <th>学生数量</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="course:${courseList}">
-                    <td th:text="${course.name}">空间</td>
-                    <td th:text="${course.teacher}">空间</td>
-                    <td th:text="${course.address}">空间</td>
-                    <td th:text="${course.time}">空间</td>
-                    <td th:text="${course.studentList.size()}">空间</td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="sixteen wide column">
+            <div class="ui segments">
+                <div class="ui segment">
+                    <!--选项栏-->
+                    <div class="ui top attached tabular menu" style="margin-top: 40px">
+                        <a class="active item" data-tab="first">学生管理</a>
+                        <a class="item" data-tab="second">课程管理</a>
+                    </div>
+                    <!--学生管理-->
+                    <div class="ui bottom attached active tab segment" data-tab="first">
+                        <table class="ui celled table">
+                            <thead>
+                            <tr>
+                                <th class="center aligned">学号</th>
+                                <th class="center aligned">姓名</th>
+                                <th class="center aligned">年龄</th>
+                                <th class="center aligned">班级</th>
+                                <th class="center aligned">选课数量</th>
+                                <th class="center aligned">
+                                    操作
+                                    <button data-position="bottom center" class="ui green button insertStudentButton"
+                                            style="margin-left: 20px">新增
+                                    </button>
+                                    <div class="ui special popup insertStudentPopup">
+                                        <form class="ui form" method="post" th:action="@{/admin/student/insert}">
+                                            <div class="field">
+                                                <label>学号</label>
+                                                <input type="text" name="id" placeholder="请输入学号">
+                                            </div>
+                                            <div class="field">
+                                                <label>姓名</label>
+                                                <input type="text" name="name" placeholder="请输入姓名">
+                                            </div>
+                                            <div class="field">
+                                                <label>年龄</label>
+                                                <input type="text" name="age" placeholder="请输入年龄">
+                                            </div>
+                                            <div class="field">
+                                                <label>班级</label>
+                                                <div class="ui selection dropdown classDropdown">
+                                                    <input type="hidden" name="classId">
+                                                    <i class="dropdown icon"></i>
+                                                    <div class="default text">请选择班级</div>
+                                                    <div class="menu">
+                                                        <div th:each="class:${classList}" class="item"
+                                                             th:data-value="${class.id}" th:text="${class.name}">Male
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label>密码</label>
+                                                <input type="text" name="password" placeholder="请输入密码">
+                                            </div>
+                                            <button class="ui button" type="submit">提交</button>
+                                        </form>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="student:${studentList}">
+                                <td class="center aligned" th:text="${student.id}">空间</td>
+                                <td class="center aligned" th:text="${student.name}">空间</td>
+                                <td class="center aligned" th:text="${student.age}">空间</td>
+                                <td class="center aligned" th:text="${student.itsClass.name}">空间</td>
+                                <td class="center aligned" th:text="${student.courseList.size()}">空间</td>
+                                <td class="center aligned">
+                                    <div class="ui center aligned column">
+                                        <button data-position="bottom center"
+                                                class="ui small blue button updateStudentButton">
+                                            修改
+                                        </button>
+                                        <div class="ui special popup updateStudentPopup">
+                                            <form class="ui form" method="post" th:action="@{/admin/student/update}">
+                                                <div class="field">
+                                                    <label>学号</label>
+                                                    <input type="text" name="id" readonly="readonly"
+                                                           th:value="${student.id}">
+                                                </div>
+                                                <div class="field">
+                                                    <label>姓名</label>
+                                                    <input type="text" name="name" placeholder="请输入姓名"
+                                                           th:value="${student.name}">
+                                                </div>
+                                                <div class="field">
+                                                    <label>年龄</label>
+                                                    <input type="text" name="age" placeholder="请输入年龄"
+                                                           th:value="${student.age}">
+                                                </div>
+                                                <div class="field">
+                                                    <label>班级</label>
+                                                    <div class="ui selection dropdown classDropdown">
+                                                        <input type="hidden" name="classId"
+                                                               th:value="${student.classId}">
+                                                        <i class="dropdown icon"></i>
+                                                        <div class="text" th:text="${student.itsClass.name}">请选择班级</div>
+                                                        <div class="menu">
+                                                            <div th:each="class:${classList}" class="item"
+                                                                 th:classappend="${student.classId == class.id }?'active selected':''"
+                                                                 th:data-value="${class.id}" th:text="${class.name}">
+                                                                Male
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <label>密码</label>
+                                                    <input type="text" name="password" placeholder="请输入密码"
+                                                           th:value="${student.password}">
+                                                </div>
+                                                <button class="ui button" type="submit">提交</button>
+                                            </form>
+                                        </div>
+                                        <a th:href="@{/admin/student/delete(id = ${student.id})}"
+                                           class="ui small red button deleteStudentButton">
+                                            删除
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--课程管理-->
+                    <div class="ui bottom attached tab segment" data-tab="second">
+                        <table class="ui celled table">
+                            <thead>
+                            <tr>
+                                <th class="center aligned">课程名称</th>
+                                <th class="center aligned">任课老师</th>
+                                <th class="center aligned">上课地址</th>
+                                <th class="center aligned">上课时间</th>
+                                <th class="center aligned">学生数量</th>
+                                <th class="center aligned">
+                                    操作
+                                    <button data-position="bottom center" class="ui green button insertCourseButton"
+                                            style="margin-left: 20px">新增
+                                    </button>
+                                    <div class="ui special popup insertCoursePopup">
+                                        <form class="ui form" method="post" th:action="@{/admin/course/insert}">
+                                            <div class="field">
+                                                <label>课程名称</label>
+                                                <input type="text" name="name" placeholder="请输入课程名称">
+                                            </div>
+                                            <div class="field">
+                                                <label>任课老师</label>
+                                                <input type="text" name="teacher" placeholder="请输入任课老师">
+                                            </div>
+                                            <div class="field">
+                                                <label>上课地址</label>
+                                                <input type="text" name="age" placeholder="请输入上课地址">
+                                            </div>
+                                            <div class="field">
+                                                <label>上课时间</label>
+                                                <div class="ui selection dropdown timeDropdown">
+                                                    <input type="hidden" name="classId">
+                                                    <i class="dropdown icon"></i>
+                                                    <div class="default text">请选择上课时间</div>
+                                                    <div class="menu">
+                                                        <div class="item" >Male</div>
+                                                        <div class="item">Male</div>
+                                                        <div class="item">Male</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="ui button" type="submit">提交</button>
+                                        </form>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="course:${courseList}">
+                                <td class="center aligned" th:text="${course.name}">空间</td>
+                                <td class="center aligned" th:text="${course.teacher}">空间</td>
+                                <td class="center aligned" th:text="${course.address}">空间</td>
+                                <td class="center aligned" th:text="${course.time}">空间</td>
+                                <td class="center aligned" th:text="${course.studentList.size()}">空间</td>
+                                <td class="center aligned">
+                                    <button class="ui blue button">
+                                        修改
+                                    </button>
+                                    <button class="ui red button">
+                                        删除
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -74,8 +219,37 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
 <script>
-    $('.menu .item')
-        .tab()
-    ;
+    $(function () {
+        $(".deleteStudentButton").click(function () {
+            var b = confirm("你确定要删除吗？");
+            if (b) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+        $(".insertStudentButton").popup({
+            popup: '.insertStudentPopup',
+            on: 'click'
+        });
+        $(".updateStudentButton").popup({
+            popup: '.updateStudentPopup',
+            on: 'click'
+        });
+        $(".insertCourseButton").popup({
+            popup: '.insertCoursePopup',
+            on: 'click'
+        });
+        $('.classDropdown')
+            .dropdown()
+        ;
+        $('.timeDropdown')
+            .dropdown()
+        ;
+        $('.menu .item')
+            .tab()
+        ;
+    })
+
 </script>
 </body>

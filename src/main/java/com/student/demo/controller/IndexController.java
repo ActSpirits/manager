@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class IndexController {
@@ -17,11 +18,19 @@ public class IndexController {
     public ModelAndView indexPage(HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
         Student loginStudent = (Student)request.getSession().getAttribute("loginStudent");
-        Curriculum curriculum = new Curriculum();
+        Curriculum curriculum1 = new Curriculum();
         System.out.println(loginStudent);
         System.out.println(loginStudent.getCourseList());
         System.out.println(loginStudent.getGradeList());
-        for (Course course :loginStudent.getCourseList()){
+        Curriculum curriculum = getCurriculum(curriculum1, loginStudent.getCourseList());
+        mv.addObject("loginStudent",loginStudent);
+        mv.addObject("curriculum",curriculum);
+        mv.setViewName("logined/index");
+        return mv;
+    }
+
+    public Curriculum getCurriculum(Curriculum curriculum, List<Course> courseList){
+        for (Course course :courseList){
             switch (course.getTime()){
                 case "每周一上午一二节":
                     curriculum.setMMOAT(course.getName());
@@ -109,9 +118,6 @@ public class IndexController {
                     break;
             }
         }
-        mv.addObject("loginStudent",loginStudent);
-        mv.addObject("curriculum",curriculum);
-        mv.setViewName("logined/index");
-        return mv;
+        return curriculum;
     }
 }

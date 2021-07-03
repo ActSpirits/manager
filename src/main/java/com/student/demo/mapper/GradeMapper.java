@@ -17,4 +17,7 @@ public interface GradeMapper extends BaseMapper<Grade> {
             @Result(column = "id",property = "course",one = @One(select = "com.student.demo.mapper.CourseMapper.getCourseByGradeId"))
     })
     public List<Grade> listByStudentId(@Param("studentId")String studentId);
+
+    @Delete("delete from t_grade where studentId = #{id}")
+    public void deleteByStudentId(@Param("id") String id);
 }

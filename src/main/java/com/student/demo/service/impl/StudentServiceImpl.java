@@ -1,7 +1,9 @@
 package com.student.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.student.demo.Bean.Grade;
 import com.student.demo.Bean.Student;
+import com.student.demo.mapper.GradeMapper;
 import com.student.demo.mapper.StudentMapper;
 import com.student.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,10 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     @Autowired
     private StudentMapper studentMapper;
 
+    @Autowired
+    private GradeMapper gradeMapper;
+
+
     @Override
     public Student getOneById(String id) {
         return studentMapper.getOneById(id);
@@ -25,5 +31,22 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     @Override
     public List<Student> listAllStudent() {
         return studentMapper.listAllStudent();
+    }
+
+    @Override
+    public void insertOne(Student student) {
+        studentMapper.insertOne(student.getId(),student.getName(),student.getAge(),student.getClassId(),student.getPassword());
+    }
+
+    @Override
+    public void deleteOne(String id) {
+        gradeMapper.deleteByStudentId(id);
+        studentMapper.deleteStudent_CourseByStudentId(id);
+        studentMapper.deleteOne(id);
+    }
+
+    @Override
+    public void updateOne(Student student) {
+        studentMapper.updateOne(student.getId(),student.getName(),student.getAge(),student.getClassId(),student.getPassword());
     }
 }

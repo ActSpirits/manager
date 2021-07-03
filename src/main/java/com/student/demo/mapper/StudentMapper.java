@@ -30,4 +30,16 @@ public interface StudentMapper extends BaseMapper<Student> {
     @Select("select * from t_student")
     @ResultMap("studentMap1")
     public List<Student> listAllStudent();
+
+    @Insert("insert into t_student(id,name,age,classId,password) values (#{id},#{name},#{age},#{classId},#{password})")
+    public void insertOne(@Param("id") String id,@Param("name") String name,@Param("age") Integer age,@Param("classId") Integer classId,@Param("password") String password);
+
+    @Delete("delete from t_student_course where studentId = #{id}")
+    public void deleteStudent_CourseByStudentId(@Param("id") String id);
+
+    @Delete("delete from t_student where id = #{id}")
+    public void deleteOne(@Param("id") String id);
+
+    @Update("update t_student set name = #{name},age = #{age},classId = #{classId}, password = #{password} where id = #{id}")
+    public void updateOne(@Param("id") String id,@Param("name") String name,@Param("age") Integer age,@Param("classId") Integer classId,@Param("password") String password);
 }

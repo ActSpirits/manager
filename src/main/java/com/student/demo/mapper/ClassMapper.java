@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.student.demo.Bean.Class;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface ClassMapper extends BaseMapper<Class> {
 
@@ -21,4 +23,7 @@ public interface ClassMapper extends BaseMapper<Class> {
     public Class getOneByStudentId(@Param("studentId")Integer studentId);
 
 
+    @Select("select * from t_class")
+    @ResultMap("classMap1")
+    public List<Class> listAllClass();
 }
