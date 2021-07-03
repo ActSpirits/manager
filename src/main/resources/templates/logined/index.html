@@ -75,114 +75,121 @@
         </div>
         <!--右边主内容区-->
         <div class="twelve wide column">
-            <div class="ui top attached tabular menu">
-                <a class="item active" data-tab="first">课程</a>
-<!--                <a class="item" data-tab="second">成绩</a>-->
-                <a class="item" data-tab="second">选课</a>
-            </div>
-            <div class="ui bottom attached tab segment active" data-tab="first">
-                <table class="ui celled table">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>上午一二节</th>
-                        <th>上午三四节</th>
-                        <th>下午一二节</th>
-                        <th>下午三四节</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>周一</td>
-                        <td th:text="${curriculum.MMOAT}">空间</td>
-                        <td th:text="${curriculum.MMTAF}">空间</td>
-                        <td th:text="${curriculum.MAOAT}">空间</td>
-                        <td th:text="${curriculum.MATAF}">空间</td>
-                    </tr>
-                    <tr>
-                        <td>周二</td>
-                        <td th:text="${curriculum.TMOAT}">空间</td>
-                        <td th:text="${curriculum.TMTAF}">空间</td>
-                        <td th:text="${curriculum.TAOAT}">空间</td>
-                        <td th:text="${curriculum.TATAF}">空间</td>
-                    </tr>
-                    <tr>
-                        <td>周三</td>
-                        <td th:text="${curriculum.WMOAT}">空间</td>
-                        <td th:text="${curriculum.WMTAF}">空间</td>
-                        <td th:text="${curriculum.WAOAT}">空间</td>
-                        <td th:text="${curriculum.WATAF}">空间</td>
-                    </tr>
-                    <tr>
-                        <td>周四</td>
-                        <td th:text="${curriculum.THMOAT}">空间</td>
-                        <td th:text="${curriculum.THMTAF}">空间</td>
-                        <td th:text="${curriculum.THAOAT}">空间</td>
-                        <td th:text="${curriculum.THATAF}">空间</td>
-                    </tr>
-                    <tr>
-                        <td>周五</td>
-                        <td th:text="${curriculum.FMOAT}">空间</td>
-                        <td th:text="${curriculum.FMTAF}">空间</td>
-                        <td th:text="${curriculum.FAOAT}">空间</td>
-                        <td th:text="${curriculum.FATAF}">空间</td>
-                    </tr>
-                    <tr>
-                        <td>周六</td>
-                        <td th:text="${curriculum.SMOAT}">空间</td>
-                        <td th:text="${curriculum.SMTAF}">空间</td>
-                        <td th:text="${curriculum.SAOAT}">空间</td>
-                        <td th:text="${curriculum.SATAF}">空间</td>
-                    </tr>
-                    <tr>
-                        <td>周日</td>
-                        <td th:text="${curriculum.SOMOAT}">空间</td>
-                        <td th:text="${curriculum.SOMTAF}">空间</td>
-                        <td th:text="${curriculum.SOAOAT}">空间</td>
-                        <td th:text="${curriculum.SOATAF}">空间</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!--课程管理-->
-            <div class="ui bottom attached tab segment" data-tab="second">
-                <table class="ui celled table">
-                    <thead>
-                    <tr>
-                        <th class="center aligned">课程名称</th>
-                        <th class="center aligned">任课老师</th>
-                        <th class="center aligned">上课地址</th>
-                        <th class="center aligned">上课时间</th>
-                        <th class="center aligned">学生数量</th>
-                        <th class="center aligned">操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="course:${courseList}">
-                        <td class="center aligned" th:text="${course.name}">空间</td>
-                        <td class="center aligned" th:text="${course.teacher}">空间</td>
-                        <td class="center aligned" th:text="${course.address}">空间</td>
-                        <td class="center aligned" th:text="${course.time}">空间</td>
-                        <td class="center aligned" th:text="${course.studentList.size()}">空间</td>
-                        <td class="center aligned">
-                            <a th:href="@{/selectCourse(id = ${course.id})}" class="ui blue button">
-                                选课
-                            </a>
-                            <a th:each="studentCourse:${session.loginStudent.courseList}" th:if="${studentCourse.getTime() == course.time}" th:href="@{/disSelectCourse(id = ${course.id})}" class="ui red button">
-                                退课
-                            </a>
-<!--                            <a th:each="studentCourse:${session.loginStudent.courseList}" th:if="${studentCourse.getTime() == course.time}" th:href="@{/selectCourse(id = ${course.id})}" class="ui blue button">-->
-<!--                                选课-->
-<!--                            </a>-->
-                        </td>
+            <div class="ui segments">
+                <div class="ui segment">
+                    <div class="ui top attached tabular menu">
+                        <a class="item active" data-tab="first">课程</a>
+                        <!--                <a class="item" data-tab="second">成绩</a>-->
+                        <a class="item" data-tab="second">选课</a>
+                    </div>
+                    <!--学生管理-->
+                    <div class="ui bottom attached tab segment active" data-tab="first">
+                        <table class="ui celled table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>上午一二节</th>
+                                <th>上午三四节</th>
+                                <th>下午一二节</th>
+                                <th>下午三四节</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>周一</td>
+                                <td th:text="${curriculum.MMOAT}">空间</td>
+                                <td th:text="${curriculum.MMTAF}">空间</td>
+                                <td th:text="${curriculum.MAOAT}">空间</td>
+                                <td th:text="${curriculum.MATAF}">空间</td>
+                            </tr>
+                            <tr>
+                                <td>周二</td>
+                                <td th:text="${curriculum.TMOAT}">空间</td>
+                                <td th:text="${curriculum.TMTAF}">空间</td>
+                                <td th:text="${curriculum.TAOAT}">空间</td>
+                                <td th:text="${curriculum.TATAF}">空间</td>
+                            </tr>
+                            <tr>
+                                <td>周三</td>
+                                <td th:text="${curriculum.WMOAT}">空间</td>
+                                <td th:text="${curriculum.WMTAF}">空间</td>
+                                <td th:text="${curriculum.WAOAT}">空间</td>
+                                <td th:text="${curriculum.WATAF}">空间</td>
+                            </tr>
+                            <tr>
+                                <td>周四</td>
+                                <td th:text="${curriculum.THMOAT}">空间</td>
+                                <td th:text="${curriculum.THMTAF}">空间</td>
+                                <td th:text="${curriculum.THAOAT}">空间</td>
+                                <td th:text="${curriculum.THATAF}">空间</td>
+                            </tr>
+                            <tr>
+                                <td>周五</td>
+                                <td th:text="${curriculum.FMOAT}">空间</td>
+                                <td th:text="${curriculum.FMTAF}">空间</td>
+                                <td th:text="${curriculum.FAOAT}">空间</td>
+                                <td th:text="${curriculum.FATAF}">空间</td>
+                            </tr>
+                            <tr>
+                                <td>周六</td>
+                                <td th:text="${curriculum.SMOAT}">空间</td>
+                                <td th:text="${curriculum.SMTAF}">空间</td>
+                                <td th:text="${curriculum.SAOAT}">空间</td>
+                                <td th:text="${curriculum.SATAF}">空间</td>
+                            </tr>
+                            <tr>
+                                <td>周日</td>
+                                <td th:text="${curriculum.SOMOAT}">空间</td>
+                                <td th:text="${curriculum.SOMTAF}">空间</td>
+                                <td th:text="${curriculum.SOAOAT}">空间</td>
+                                <td th:text="${curriculum.SOATAF}">空间</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--课程管理-->
+                    <div class="ui bottom attached tab segment" data-tab="second">
+                        <table class="ui celled table">
+                            <thead>
+                            <tr>
+                                <th class="center aligned">课程名称</th>
+                                <th class="center aligned">任课老师</th>
+                                <th class="center aligned">上课地址</th>
+                                <th class="center aligned">上课时间</th>
+                                <th class="center aligned">学生数量</th>
+                                <th class="center aligned">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="course:${courseList}">
+                                <td class="center aligned" th:text="${course.name}">空间</td>
+                                <td class="center aligned" th:text="${course.teacher}">空间</td>
+                                <td class="center aligned" th:text="${course.address}">空间</td>
+                                <td class="center aligned" th:text="${course.time}">空间</td>
+                                <td class="center aligned" th:text="${course.studentList.size()}">空间</td>
+                                <td class="center aligned">
+                                    <a th:href="@{/selectCourse(id = ${course.id})}" class="ui blue button">
+                                        选课
+                                    </a>
+                                    <a th:each="studentCourse:${session.loginStudent.courseList}"
+                                       th:if="${studentCourse.getTime() == course.time}"
+                                       th:href="@{/disSelectCourse(id = ${course.id})}" class="ui red button">
+                                        退课
+                                    </a>
+                                    <!--                            <a th:each="studentCourse:${session.loginStudent.courseList}" th:if="${studentCourse.getTime() == course.time}" th:href="@{/selectCourse(id = ${course.id})}" class="ui blue button">-->
+                                    <!--                                选课-->
+                                    <!--                            </a>-->
+                                </td>
 
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

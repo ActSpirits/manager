@@ -19,7 +19,14 @@
     <div class="ui stackable grid">
         <div class="sixteen wide column">
             <div class="ui segments">
-                <div class="ui segment">
+                <div class="ui  segment">
+                    <div class="ui grid">
+                        <div class="ui center aligned column">
+                            <h1 class="ui teal header">学生后台管理页面</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui teal segment">
                     <!--选项栏-->
                     <div class="ui top attached tabular menu" style="margin-top: 40px">
                         <a class="active item" data-tab="first">学生管理</a>
@@ -78,7 +85,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="student:${studentList}">
+                            <tr th:each="student:${studentPageInfo.list}">
                                 <td class="center aligned" th:text="${student.id}">空间</td>
                                 <td class="center aligned" th:text="${student.name}">空间</td>
                                 <td class="center aligned" th:text="${student.age}">空间</td>
@@ -139,6 +146,19 @@
                                 </td>
                             </tr>
                             </tbody>
+                            <tfoot>
+                            <tr><th colspan="6">
+                                <div class="ui right floated pagination menu">
+                                    <a class="icon item" th:if="${studentPageInfo.pageNum>1}" th:href="@{/admin/index(pn = ${studentPageInfo.pageNum-1})}">
+                                        <i class="left chevron icon"></i>
+                                    </a>
+                                    <a class="item" th:each="num:${#numbers.sequence(1,studentPageInfo.pages)}" th:href="@{/admin/index(pn = ${num})}" th:text="${num}">1</a>
+                                    <a class="icon item" th:if="${studentPageInfo.pageNum != studentPageInfo.pages}" th:href="@{/admin/index(pn = ${studentPageInfo.pageNum+1})}">
+                                        <i class="right chevron icon"></i>
+                                    </a>
+                                </div>
+                            </th>
+                            </tr></tfoot>
                         </table>
                     </div>
                     <!--课程管理-->
