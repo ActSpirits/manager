@@ -49,8 +49,6 @@ public class LoginController {
         ModelAndView mv =new ModelAndView();
         Student studentById = studentService.getOneById(studentId);
         if (studentById != null && studentById.getPassword().equals(password)){
-            Class classById = classService.getOneById(studentById.getClassId());
-            studentById.setItsClass(classById);
             request.getSession().setAttribute("loginStudent",studentById);
             request.getSession().removeAttribute("msg");
             return "redirect:/index";

@@ -22,13 +22,49 @@
             <a class="item" data-tab="second">课程管理</a>
         </div>
         <div class="ui bottom attached active tab segment" data-tab="first">
-            第一
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>班级</th>
+                    <th>选课数量</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student:${studentList}">
+                    <td th:text="${student.id}">空间</td>
+                    <td th:text="${student.name}">空间</td>
+                    <td th:text="${student.age}">空间</td>
+                    <td th:text="${student.itsClass.name}">空间</td>
+                    <td th:text="${student.courseList.size()}">空间</td>
+
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div class="ui bottom attached tab segment" data-tab="second">
-            第二
-        </div>
-        <div class="ui bottom attached tab segment" data-tab="third">
-            第三
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th>课程名称</th>
+                    <th>任课老师</th>
+                    <th>上课地址</th>
+                    <th>上课时间</th>
+                    <th>学生数量</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="course:${courseList}">
+                    <td th:text="${course.name}">空间</td>
+                    <td th:text="${course.teacher}">空间</td>
+                    <td th:text="${course.address}">空间</td>
+                    <td th:text="${course.time}">空间</td>
+                    <td th:text="${course.studentList.size()}">空间</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

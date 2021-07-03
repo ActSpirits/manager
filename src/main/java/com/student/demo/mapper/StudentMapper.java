@@ -14,7 +14,7 @@ public interface StudentMapper extends BaseMapper<Student> {
             @Result(id = true,property = "id",column = "id"),
             @Result(property = "name",column = "name"),
             @Result(property = "age",column = "age"),
-            @Result(property = "classId",column = "classId"),
+            @Result(property = "itsClass",column = "id",one = @One(select = "com.student.demo.mapper.ClassMapper.getOneByStudentId")),
             @Result(property = "password",column = "password"),
             @Result(property = "gradeList",column = "id",many = @Many(select = "com.student.demo.mapper.GradeMapper.listByStudentId")),
             @Result(property = "courseList",column = "id",many = @Many(select = "com.student.demo.mapper.CourseMapper.listByStudentId")),
@@ -23,4 +23,11 @@ public interface StudentMapper extends BaseMapper<Student> {
 
     @Select("select * from t_student where classId = #{classId}")
     public List<Student> listByClassId(@Param("classId")Integer id);
+
+    @Select("select * from t_student where id in (select studentId from t_student_course where courseId = #{courseId})")
+    public List<Student> listByCourseId(@Param("courseId")Integer courseId);
+
+    @Select("select * from t_student")
+    @ResultMap("studentMap1")
+    public List<Student> listAllStudent();
 }

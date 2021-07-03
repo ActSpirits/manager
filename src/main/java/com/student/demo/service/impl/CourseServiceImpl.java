@@ -18,4 +18,8 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     private CourseMapper courseMapper;
 
 
+    @Override
+    public List<Course> listAllCourse() {
+        return courseMapper.listAllCourse();
+    }
 }

@@ -16,5 +16,9 @@ public interface ClassMapper extends BaseMapper<Class> {
     })
     public Class getOneById(@Param("id") Integer id);
 
+    @Select("select * from t_class where id = (select classId from t_student where id = #{studentId})")
+    @ResultMap("classMap1")
+    public Class getOneByStudentId(@Param("studentId")Integer studentId);
+
 
 }

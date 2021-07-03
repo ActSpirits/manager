@@ -17,7 +17,6 @@ public class Student {
     private String id;
     private String name;
     private Integer age;
-    private Integer classId;
     private Class itsClass;
     private String password;
     private List<Grade> gradeList;
